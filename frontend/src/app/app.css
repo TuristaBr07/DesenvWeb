@@ -1,0 +1,50 @@
+/* --- Estilos Gerais (Mantidos) --- */
+.container { font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+.saldo-box { padding: 10px; text-align: center; border-radius: 8px; color: white; margin-bottom: 20px; }
+.positivo { background-color: #28a745; }
+.negativo { background-color: #dc3545; }
+
+.form-section div { margin-bottom: 10px; display: flex; flex-direction: column; }
+input, select { padding: 8px; margin-top: 5px; }
+button { padding: 10px; cursor: pointer; background-color: #007bff; color: white; border: none; border-radius: 4px; }
+
+ul { list-style: none; padding: 0; }
+.card-transacao { border-left: 5px solid #ccc; background: #f9f9f9; padding: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.receita { border-left-color: #28a745; }
+.despesa { border-left-color: #dc3545; }
+
+.categoria-badge { background-color: #e0e0e0; padding: 2px 8px; border-radius: 10px; font-size: 0.8em; color: #555; margin-left: 5px; }
+.btn-delete { background-color: transparent; color: #dc3545; border: 1px solid #dc3545; margin-left: 10px; }
+.btn-delete:hover { background-color: #dc3545; color: white; }
+
+/* --- NOVO: Estilo do Gráfico Bônus --- */
+.chart-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.chart-card h3 { text-align: center; margin-top: 0; }
+
+.chart-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* O círculo mágico feito com CSS */
+.pie-chart {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.legend { font-size: 0.9em; }
+.legend-item { display: flex; align-items: center; margin-bottom: 5px; }
+.dot { width: 12px; height: 12px; display: inline-block; margin-right: 8px; border-radius: 2px; }

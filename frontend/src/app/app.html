@@ -1,0 +1,85 @@
+<div class="container">
+  <h1>Gestor Financeiro Pessoal</h1>
+
+  <div class="saldo-box" [class.positivo]="saldo >= 0" [class.negativo]="saldo < 0">
+    <h2>Saldo Atual: {{ saldo | currency:'BRL' }}</h2>
+  </div>
+
+  @if (dadosGrafico.length > 0) {
+    <div class="chart-card">
+      <h3>Gastos por Categoria (Despesas)</h3>
+      <div class="chart-flex">
+        <div class="pie-chart" [style.background]="estiloGrafico"></div>
+        <div class="legend">
+          @for (d of dadosGrafico; track d.categoria) {
+            <div class="legend-item">
+              <span class="dot" [style.background]="d.cor"></span>
+              <span>{{ d.categoria }} ({{ d.percent | number:'1.0-0' }}%)</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  <hr>
+
+  <section class="form-section">
+    <h3>{{ idEdicao ? 'Editar Transação' : 'Nova Transação' }}</h3>
+    <div>
+      <input placeholder="Descrição" [(ngModel)]="descricao">
+      <input placeholder="Valor" type="number" [(ngModel)]="valor">
+      <input placeholder="Categoria" [(ngModel)]="categoria">
+      <select [(ngModel)]="tipo">
+        <option value="Receita">Receita</option>
+        <option value="Despesa">Despesa</option>
+      </select>
+      
+      <button (click)="salvar()" [style.background-color]="idEdicao ? '#ffc107' : '#007bff'">
+        {{ idEdicao ? 'Atualizar' : 'Adicionar' }}
+      </button>
+      
+      @if(idEdicao) {
+        <button (click)="limparFormulario()" style="background-color: #6c757d; margin-left: 5px;">Cancelar</button>
+      }
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <input 
+      type="text" 
+      placeholder="🔎 Filtrar por categoria ou descrição..." 
+      [(ngModel)]="filtroTexto" 
+      (input)="filtrar()"
+      style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;"
+    >
+  </section>
+
+  <section>
+    <h3>Extrato</h3>
+    <ul>
+      @for (t of transacoesFiltradas; track t._id) {
+        <li class="card-transacao" [class.receita]="t.tipo === 'Receita'" [class.despesa]="t.tipo === 'Despesa'">
+          <div class="info">
+            <strong>{{ t.descricao }}</strong> <span class="categoria-badge">{{ t.categoria }}</span>
+            <br>
+            <small>{{ t.data | date:'dd/MM/yyyy HH:mm' }}</small>
+          </div>
+          <div class="valores">
+            <span>{{ t.valor | currency:'BRL' }}</span>
+            
+            <button (click)="editar(t)" style="margin-left: 10px; background: transparent; border: 1px solid blue; color: blue; border-radius: 4px; padding: 5px;">
+              ✏️
+            </button>
+
+            <button (click)="excluir(t._id!)" class="btn-delete">Excluir</button>
+          </div>
+        </li>
+      } @empty {
+        <p>Nenhuma transação encontrada.</p>
+      }
+    </ul>
+  </section>
+</div>
